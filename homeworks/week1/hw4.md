@@ -34,7 +34,7 @@
 9. 保存歷史紀錄：
 開一個檔案（order）整理流水號
  
-#### 上述概念，其實就類似 Git 版本控制系統的運作模式。目的是進行備份與共用，讓電腦自動幫我們做一些記錄與管理。
+#### 上述概念，其實就類似 Git 版本控制系統的head <file>                      # 只顯示檔案的前 10 行運作模式。目的是進行備份與共用，讓電腦自動幫我們做一些記錄與管理。
 
 > 補充：GitHub 就是透過 Git 進行版本控制的軟體原始碼代管服務平台。
 
@@ -326,6 +326,6 @@ GitHub 建議管理專案的流程：[官網說明](https://guides.github.com/in
 5. 進行 commit：`git commit -am “new joke”`
 6. push 本地端分支回遠端 GitHub：`git push origin joke_1`
 7. 到 Github 查看 branch 頁面，提出 PR（pull request）
-8. 完成合併到遠端 master，即可刪除分支 joke_1
+8. 點選 Merge pull request 完成合併到遠端 master，即可刪除分支 joke_1
 9. 把 GitHub 更新的 master 同步到本地端：`git push origin master`
-10. 回到本地端，使用 `git branch -d joke_1` 刪除分支，結束！
+10. 回到本地端，使用 `git branch -d joke_1` 刪除已合併的分支，結束！

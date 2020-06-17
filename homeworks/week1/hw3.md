@@ -60,9 +60,18 @@
         - 範例：`mv data test`：將 data 檔案名稱更改為 test
 #### `vim`：進入文字編輯器
 
-在嵌入模式編輯完成後，需按下 [ESC] 按鍵回到一般指令模式，才能下 `:wq` 指令存檔（write）並離開 （quit)。
+可分為普通模式跟編輯模式：
 
-參考 vim 介紹：[vi 與 vim 的指令整理](http://www.vixual.net/blog/archives/234)
+- 按鍵 i：進入編輯模式
+- 按鍵 Esc：進入普通模式
+- `:q` 退出
+- `:wq` 存檔（write）後退出（quit)
+- `:q!` 不存檔直接退出
+
+參考資料：
+
+1. [vi 與 vim 的指令整理](http://www.vixual.net/blog/archives/234)、
+2. [鳥哥的Linux 私房菜-- 第九章、vim 程式編輯器](http://linux.vbird.org/linux_basic/0310vi.php)
 
 ## 更多常用指令
 
