@@ -2,7 +2,7 @@
 
 ### 從 GitHub clone 課綱到本地端
 
-1. 開啟 [GitHuba classroom](https://classroom.github.com/a/SbDvk2VA)，複製課綱模板到自己的帳號底下
+1. 開啟 [GitHub classroom](https://classroom.github.com/a/SbDvk2VA)，複製課綱模板到自己的帳號底下
 
 ![clone-1](https://i.imgur.com/UBpEFxx.png)
 
