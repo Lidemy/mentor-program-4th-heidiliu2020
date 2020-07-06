@@ -14,7 +14,6 @@ rl.on('line', (line) => {
 /* eslint-disable */
 // 判斷比大小
 function compare(a, b, k) {
-/* eslint-disable-next-line */
   k = Number(k);
 
   if (a === b) {
