@@ -30,11 +30,8 @@ function compare(a, b, k) {
 
   // 判斷字串長度是否相同
   // 不同：比較字串長度
-  if (a.length > b.length) {
-    return 'A';
-  }
-  if (a.length < b.length) {
-    return 'B';
+  if (a.length !== b.length) {
+    return a.length > b.length ? 'A' : 'B';
   }
 
   // 相同：從字串最左邊開始比大小
@@ -42,7 +39,6 @@ function compare(a, b, k) {
     for (let j = 0; j < a.length; j += 1) {
       // 若相等，就繼續迴圈比下一位
       if (a[j] === b[j]) {
-      /* eslint-disable-next-line */
         continue;
       }
       return a[j] > b[j] ? 'A' : 'B';
