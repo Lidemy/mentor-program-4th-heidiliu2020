@@ -11,7 +11,7 @@ rl.on('line', (line) => {
   lines.push(line);
 });
 
-// 拿到所有資料
+// 判斷質數
 function isPrime(n) {
   if (n === 1) {
     return false;
@@ -24,6 +24,7 @@ function isPrime(n) {
   return true;
 }
 
+// 前面已宣告過 lines，這裡改用 input 作為參數，拿取內容 lines
 function solve(input) {
   const arr = [];
   for (let i = 1; i < input.length; i += 1) {
@@ -42,5 +43,3 @@ function solve(input) {
 rl.on('close', () => {
   solve(lines);
 });
-
-solve(['5']);
