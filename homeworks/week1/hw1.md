@@ -21,7 +21,7 @@
 
 ![git branch week1](https://i.imgur.com/UDU1YvA.png)
 
-5. 開始寫作業
+5. `git checkout week1`：切換到 week1，開始寫作業
 6. 寫完作業後，若有新增檔案，要先使用 `git add .`：加入版本控制
 7. `git commit -am "week1_finish"`：進行 commit
 8. `git push origin week1`：將檔案上傳到遠端 GitHub
@@ -36,3 +36,4 @@
 12. 回到本地端，輸入 `git checkout master`：切換到 master
 13. `git pull origin master`：將遠端更新過的 master 同步回本地端
 14. `git branch -d week1`：刪除已合併的分支 week1
+15. `git branch -v`：可查看目前在哪個分支
