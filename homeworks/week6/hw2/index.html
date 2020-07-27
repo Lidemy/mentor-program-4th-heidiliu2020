@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=">
+    <title>hw2：活動報名表單</title>
+    <!-- 統整瀏覽器樣式設定，但保留常用標籤的默認樣式 -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <form>
+        <div class="header">
+          <h1>新拖延運動報名表單</h1>
+          <p>活動日期：2020/12/10 ~ 2020/12/11</p>
+          <p>活動地點：台北市大安區新生南路二段1號</p>
+          <h3>*必填</h3>
+        </div>
+
+        <div class="content">
+          <div class="section">
+            <label for="name">暱稱 <span>*</span></label>
+            <input type="text" id="name" value="您的回答">
+          </div>
+
+          <div class="section">
+            <label for="email">電子郵件 <span>*</span></label>
+            <input type="email" id="name" value="您的電子郵件">
+          </div>
+
+          <div class="section">
+            <label for="phone">手機號碼 <span>*</span></label>
+            <input type="tel" id="phone" value="您的手機號碼">
+          </div>
+
+          <div class="type">
+            <label for="type">報名類型 <span>*</span></label>
+              <div class="choice">
+                <input type="radio" name="type" id="imagine">
+                <label for="imagine">躺在床上用想像力實作</label>
+              </div>
+              <div class="choice">
+                <input type="radio" name="type" id="find">
+                <label for="find">趴在地上滑手機找現成的</label>
+              </div>
+          </div>
+
+          <div class="section">
+            <label for="how">怎麼知道這個活動的？ <span>*</span></label>
+            <input type="how" id="how" value="您的回答">
+          </div>
+
+          <div class="section other">
+            <label for="other">其他</label>
+            <p>對活動的一些建議</p>
+            <input type="other" id="other" value="您的回答">
+          </div>
+        </div>
+
+        <div class="button">
+          <button type="submit">提交</button>
+          <p>請勿透過表單送出您的密碼。</p>
+        </div>
+      </form>
+
+      <div class="footer">
+        <p>© 2020 © Copyright. All rights Reserved.</p>
+      </div>
+    </div>
+  </body>
+</html>
