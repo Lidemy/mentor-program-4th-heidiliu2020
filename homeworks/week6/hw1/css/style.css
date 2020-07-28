@@ -32,7 +32,7 @@ ul, li, a {
   box-shadow: -1.4px -1.4px 6px 0 #97a2a0;
 }
 
-.navbar__siteName{
+.navbar__site-name {
   color: #489846;
   font-size: 36px; 
 }
@@ -185,6 +185,8 @@ ul, li, a {
   border-radius: 5px;
   box-shadow: -1.4px -1.4px 4px 0 #d8eaef;
   transition: transform 0.2s;
+  /* 三個區塊均分寬度 */
+  width: 33%;
 }
 
 .comment li:hover {
@@ -221,13 +223,19 @@ ul, li, a {
   padding-top: 16px;
 }
 
+.footer__site-name a {
+  color: #484848; 
+  display: inline-block;
+}
+
 .footer__site-name h2 {
   font-size: 36px;
   color: #489846;
+  transition: transform 0.2s;
 }
 
 .footer__site-name a:hover {
-  color: #35564b; 
+  transform: scale(1.1);
 }
 
 .footer__copyright {
@@ -235,7 +243,7 @@ ul, li, a {
   text-align: center;
   font-size: 16px;
   color:white;
-  padding: 15px;site-name
+  padding: 15px;
 }
 
 /* 設定 RWD：視窗寬度在 768px 以下時的呈現方式 */
