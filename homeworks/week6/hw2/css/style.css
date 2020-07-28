@@ -1,0 +1,124 @@
+/* debug：視覺化元素之間的關係 */
+.debug *, .debug {
+  outline: 1px solid gold;
+}
+  
+html, body{
+  width: 100%;
+  height: 100%;
+  font-family: Questrial, "微軟正黑體";
+  margin: 0 auto; 
+  max-width: 1920px;
+  font-size: 14px;
+}
+
+/* CSS Reset：取消預設空隙 */
+h1, h2, h3, h4, p {
+  padding: 0;
+  margin: 0;
+}
+/* 去除標題項目黑點 & 底線 */
+ul, li, a {
+  list-style-type: none;
+  text-decoration: none;
+  padding: 0;
+}
+
+.wrapper {
+  background: #d0d0d0;
+  padding-top: 100px;
+}
+
+form {
+  width: 645px;
+  background: white;
+  margin: 0 auto;
+  padding: 40px;
+  box-shadow: 1.8px 2.4px 5px 0 rgba(0, 0, 0, 0.3);
+  border-top: 8px solid #fad312;
+}
+
+.header h1 {
+  font-size: 36px;
+  margin-bottom: 35px;
+}
+
+.header p {
+  margin-bottom: 10px;
+}
+
+.header h3 {
+  font-size: 16px;
+  color: #e74149;
+  margin: 10px 0 50px;
+}
+
+.content label {
+  display: inline-block;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.content label span {
+  color: #e74149;
+}
+
+.section {
+  margin-bottom: 50px;
+}
+
+.section input, .other input {
+  display: block;
+  font-size: 16px;
+  color: #afafaf;
+  border: solid 1px #d0d0d0;
+  width: 280px;
+}
+
+.type {
+  margin-bottom: 50px;
+}
+
+.choice label {
+  font-size: 14px;
+}
+
+.other label {
+  margin-bottom: 12px;
+}
+
+.other p {
+  margin-bottom: 24px;
+}
+
+button {
+  border: none;
+  border-radius: 3px;
+  background: #fad312;
+  font-size: 15px;
+  padding: 12px 30px;
+  margin-bottom: 20px;
+  transition: background 0.1s;
+}
+
+button:hover {
+  cursor: pointer;
+  background: #f7a206;
+}
+
+.footer {
+  background: #000;
+  color: #999;
+  padding: 20px;
+  text-align: center;
+  border-top: solid 3px #fad312;
+  margin-top: 65px;
+}
+
+
+/* 設定 RWD：視窗寬度在 768px 以下時的呈現方式 */
+@media(max-width: 768px) {
+  form {
+    width: 80%;
+  }
+}
