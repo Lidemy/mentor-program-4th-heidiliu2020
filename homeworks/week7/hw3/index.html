@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hw3：Todo List</title>
+  <!-- 統整瀏覽器樣式設定，但保留常用標籤的默認樣式 -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<main class="debug">
+
+  <div class="list">
+    <!-- 標題區塊 -->
+    <div class="list__header">
+      <h1 class="list__title">Todo List</h1>
+    </div>
+
+    <div class="list__content">
+      <!-- 任務區塊 -->
+      <ul class=list__container>
+        <li class="list__item">
+          <input class="item-checkbox" type="checkbox">
+          <p class="item-context">Have breakfast</p>
+          <button class="btn-deleted"></button>
+        </li>
+
+        <li class="list__item">
+          <input class="item-checkbox" type="checkbox">
+          <p class="item-context">Write code</p>
+          <button class="btn-deleted"></button>
+        </li>
+
+        <li class="list__item">
+          <input class="item-checkbox" type="checkbox">
+          <p class="item-context">Play volleyball</p>
+          <button class="btn-deleted"></button>
+        </li>
+
+        <li class="list__item">
+          <input class="item-checkbox" type="checkbox">
+          <p class="item-context">Read a book</p>
+          <button class="btn-deleted"></button>
+        </li>
+
+        <li class="list__item">
+          <input class="item-checkbox" type="checkbox">
+          <p class="item-context">Watch a movie</p>
+          <button class="btn-deleted"></button>
+        </li>
+      </ul>
+      
+      <!-- 輸入區塊 -->
+      <div class="list__form">
+        <input class="list__input" type="text" placeholder="Add New Todo Here...">
+      </div>
+    </div>
+
+  </div>
+
+</main>
+<script src="scripts/hw3.js"></script>
+</body>
+</html>

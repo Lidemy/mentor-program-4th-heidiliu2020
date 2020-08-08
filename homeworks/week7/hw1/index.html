@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hw2：活動報名表單</title>
+    <!-- 統整瀏覽器樣式設定，但保留常用標籤的默認樣式 -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <form>
+        <div class="header">
+          <h1>新拖延運動報名表單</h1>
+          <p>活動日期：2020/12/10 ~ 2020/12/11</p>
+          <p>活動地點：台北市大安區新生南路二段1號</p>
+          <h3>*必填</h3>
+        </div>
+
+        <div class="content">
+          
+          <!-- 可增加一個 require 屬性，並使用偽元素來取代 <span>*</span> -->
+          <!-- 增加 hide-error 屬性來隱藏 error 訊息 -->
+          <div class="input-block required hide-error">
+            <label class="input-block__title">暱稱 </label>
+            <input name="nickname" type="text" placeholder="您的回答">
+            <div class="input-block__error">請輸入暱稱</div>
+          </div>
+
+          <div class="input-block required hide-error">
+            <label class="input-block__title">電子郵件 </label>
+            <input name="email" type="text" placeholder="您的電子郵件">
+            <div class="input-block__error">請輸入電子郵件</div>
+          </div>
+
+          <div class="input-block required hide-error">
+            <label class="input-block__title">手機號碼 </label>
+            <input name="phone" type="text" placeholder="您的手機號碼">
+            <div class="input-block__error">請輸入手機號碼</div>
+          </div>
+
+          <div class=" input-block__radio required hide-error">
+            <label class="input-block__title">報名類型 </label>
+            <div>
+              <!-- 直接用 label 標籤包住 input，即可點擊文字連接選項，省略取 id 步驟-->
+              <label>
+                <input name="type" type="radio" value="1">躺在床上用想像力實作
+              </label>
+              <label class="input__radio">
+                <input name="type" type="radio" value="2">趴在地上滑手機找現成的
+              </label>
+              <div class="input-block__error">請選擇報名類型</div>
+            </div>
+          </div>
+
+          <div class="input-block required hide-error">
+            <label class="input-block__title">怎麼知道這個活動的？ </label>
+            <input name="referal" type="text" placeholder="您的回答">
+            <div class="input-block__error">請輸入內容</div>
+          </div>
+
+          <div class="input-block other">
+            <label>其他</label>
+            <p>對活動的一些建議</p>
+            <input name="other" type="text" placeholder="您的回答">
+          </div>
+        </div>
+
+        <div class="submit-block">
+          <button type="submit">提交</button>
+          <p>請勿透過表單送出您的密碼。</p>
+        </div>
+      </form>
+
+      <div class="footer">
+        <p>© 2020 © Copyright. All rights Reserved.</p>
+      </div>
+    </div>
+    <!-- 從外部引入 js 檔 -->
+    <script src="scripts/hw1.js"></script>
+  </body>
+</html>
