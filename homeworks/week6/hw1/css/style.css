@@ -282,12 +282,12 @@ ul, li, a {
 
   .comment ul {
     flex-direction: column;
-    justify-content: space-between;
-    /* margin-top: 60px; */
+    align-items: center;
   }
 
   .comment li {
     margin-right: 0px;
+    width: 80%;
   }
   /* nth-child(-n+2)：表示選擇列表中小於 2 的標籤，即 0 到 1 */
   .comment li:nth-child(-n+2) {
