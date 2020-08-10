@@ -1,5 +1,6 @@
 ## 什麼是 DOM？
 
+<<<<<<< HEAD
 簡言之，DOM 是由「瀏覽器」提供用來和「程式語言」溝通的橋樑。最常被用在網頁與 JavaScript 的溝通。
 
 透過 DOM 提供的 API，我們就能使用 Javascript 來選取 HTML 當中的任何元素，並進行改變結構、樣式、內容等操作。
@@ -20,6 +21,12 @@ event delegation 也就是事件代理。
 
 例如：當我們要新增按紐，若把監聽事件設在子元素，那麼新加入的子元素就必須另外處理。若使用 event delegation，直接父元素進行事件監聽，透過冒泡機制，事件會由父元素傳遞到底下的所有子元素。
 
+=======
+## 事件傳遞機制的順序是什麼；什麼是冒泡，什麼又是捕獲？
+
+## 什麼是 event delegation，為什麼我們需要它？
+
+>>>>>>> b3008a78baa988125fdf9921cac29f029f097067
 ## event.preventDefault() 跟 event.stopPropagation() 差在哪裡，可以舉個範例嗎？
 
 ### event.preventDefault()：阻止事件的預設行為
