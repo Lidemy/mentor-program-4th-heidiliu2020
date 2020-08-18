@@ -1,0 +1,264 @@
+/* CSS Reset：取消預設空隙 */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  /* border: 1px solid gold; */
+}
+
+html, body{
+  font-family: Questrial, "微軟正黑體";
+  margin: 0 auto; 
+  max-width: 1920px;
+}
+
+/* 去除標題項目黑點 & 底線 */
+ul, li, a {
+  list-style-type: none;
+  text-decoration: none;
+  padding: 0;
+}
+
+/* navbar 導覽列 */
+.navbar {
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  box-shadow: -1.4px -1.4px 6px 0 #97a2a0;
+}
+
+.navbar__site-name {
+  color: #489846;
+  font-size: 36px; 
+}
+
+.navbar__list {
+  display: flex;
+  list-style: none; 
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+}
+/* 增加按鈕的漸變效果 */
+.navbar__list li {
+  margin-left: 10px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.navbar__list li.active, .navbar__list li:hover {
+  background: #ff7286;
+}
+
+.navbar__list li.active a, .navbar__list li:hover a {
+  color: white;
+}
+
+.navbar__list li a {
+  color: black;
+  padding: 12px 24px;
+  display: block;
+}
+
+/* footer 底部版權 */
+.footer_information {
+  display: flex;
+  justify-content: space-between;
+  background: #e8efee;
+  padding: 35px;
+}
+
+.footer_information p {
+  font-size: 14px;
+  color: #484848;
+  padding-top: 16px;
+}
+
+.footer__site-name a {
+  color: #484848; 
+  display: inline-block;
+}
+
+.footer__site-name h2 {
+  font-size: 36px;
+  color: #489846;
+  transition: transform 0.2s;
+}
+
+.footer__site-name a:hover {
+  transform: scale(1.1);
+}
+
+.footer__copyright {
+  background: #35564b;
+  text-align: center;
+  font-size: 16px;
+  color:white;
+  padding: 15px;
+}
+
+/* 抽獎活動 */
+.wrapper {
+  position: relative;
+  height: 700px;
+  background: url(../img/bg.png) center/cover no-repeat;
+  padding: 50px;
+}
+
+.wrapper:after {
+  content: '';
+  position: absolute;
+  background: rgba(0, 0, 0, 0.3);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* 中獎畫面底圖 */
+.wrapper_bg-first {
+  background: url(../img/bg-1.jpg) center/cover no-repeat;
+}
+
+.wrapper_bg-second {
+  background: url(../img/bg-2.jpg) center/cover no-repeat;
+}
+
+.wrapper_bg-third {
+  background: url(../img/bg-3.jpg) center/cover no-repeat;
+}
+
+.wrapper_bg-none {
+  background:black;
+}
+
+.lottery {
+  max-width: 500px;
+  margin: 0 auto;
+  margin-bottom: 100px;
+  border-radius: 16px;
+  background: white;
+  z-index: 5;
+  position: relative;
+}
+
+.lottery__name {
+  color: #5ec1b6;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  padding: 40px 30px 0 30px;
+}
+
+.lottery__content {
+  margin: 20px;
+  padding-bottom: 24px;
+}
+
+.lottery__title {
+  color: #322929;
+  text-align: left;
+  display: flex;
+  padding: 20px 0;
+  border-bottom: 1px dotted #cdcdcd;
+  line-height: 1.6;
+}
+
+.lottery__title h3 {
+  font-size: 18px;
+  width: 90px;
+}
+
+.lottery__title p {
+  font-size: 16px;
+  /* 會佔滿剩下的區塊 */
+  flex: 1;
+}
+
+.lottery__btn, .lottery__result-btn {
+  width: 80%;
+  margin: 0px auto;
+  text-align: center;
+  background: #e62a45;
+  color: white;
+  font-size: 20px;
+  border-radius: 8px;
+  padding: 14px 0px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  margin-top: 30px;
+}
+
+.lottery__result-btn {
+  width: 40%;
+}
+
+.lottery__btn:hover, .lottery__result-btn:hover {
+  transform: scale(1.05);
+}
+
+.hidden {
+  display: none;
+}
+
+/* 中獎畫面 */
+.lottery__result {
+  position: relative;
+  z-index: 3;
+  max-width: 800px;
+  margin: 180px auto 0;
+}
+
+.lottery__result-tittle {
+  font-size: 36px;
+  color: #eee;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* 設定 RWD：視窗寬度在 768px 以下時的呈現方式 */
+@media(max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 0px;
+  }
+  
+  .navbar__site-name{
+    text-align: center;
+    padding: 12px;
+  }
+
+  .navbar__list {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .navbar__list li {
+    margin-left: 0;
+    border-radius: 0;
+  }
+
+  .footer_information {
+    flex-direction: column-reverse;
+  }
+
+  .footer__contact {
+    margin-top: 30px;
+  }
+
+  /* 中獎活動 */
+  .lottery__title {
+    flex-direction: column;
+  }
+
+  .lottery__title h3 {
+    margin-bottom: 12px;
+  }
+
+  .wrapper {
+    padding: 20px;
+  }
+}
+
