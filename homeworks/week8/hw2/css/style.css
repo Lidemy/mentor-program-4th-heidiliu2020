@@ -1,0 +1,205 @@
+/* CSS Reset：取消預設空隙 */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  /* border: 1px solid gold; */
+}
+
+html, body{
+  font-family: 'roobert', sans-serif, Questrial, "微軟正黑體";
+  margin: 0 auto; 
+  max-width: 1920px;
+}
+
+/* 去除標題項目黑點 & 底線 */
+ul, li, a {
+  list-style-type: none;
+  text-decoration: none;
+  padding: 0;
+}
+
+/* navbar 區塊 */
+.twitch__nav {
+  background: #9146FF;
+  color: #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 2px 2px 8px 1px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 3;
+}
+
+.twitch__nav-title {
+  font-size: 30px;
+  padding: 10px;
+}
+
+.twitch__nav-list {
+  font-size: 16px;
+  display: flex;
+  /* 使 li 的高度佔滿整個區塊 */
+  align-items: stretch;
+}
+
+.twitch__nav-list li {
+  cursor: pointer;
+  padding: 16px;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.twitch__nav-list li:hover {
+  color: #000;
+  background: #eee;
+}
+
+.twitch__nav-list li:active {
+  color: #000;
+} 
+
+/* 背景底圖 */
+.bg {
+  background: url(../img/bg.jpg) center/cover no-repeat;
+  position: relative;
+  /* 背景固定；預設為 scroll 捲動背景 */
+  background-attachment: fixed;
+}
+
+.bg:before {
+  content: '';
+  position: absolute;
+  background: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* content 區塊 */
+.wrapper {
+  position: relative;
+  z-index: 3;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  /* view hight：將最小高度設定為瀏覽器可顯示區域的高度 */
+  min-height: 100vh;
+}
+
+.twitch__game-name {
+  color: #eee;
+  text-align: center;
+}
+
+.twitch__game-name h2 {
+  font-size: 36px;
+}
+
+.twitch__game-name p {
+  font-size: 24px;
+  margin: 20px;
+}
+
+/* stream 區塊 */
+.streams__container {
+  display: inline-flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.stream {
+  width: 360px;
+  background: rgba(100, 80, 200, 0.5);
+  border-radius: 4px;
+  margin-bottom: 16px;
+  margin-left: 16px;
+  overflow: hidden;
+  opacity: 0.8;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+/* 在結尾放「只有寬度沒有內容」的區塊，即可調整只有 1 or 2 張的排版 */
+.stream-empty {
+  width: 360px;
+  margin-left: 16px;
+}
+
+
+.stream:hover {
+  transform: scale(1.05);
+  filter: brightness(1.05);
+  opacity: 1;
+  background: rgba(100, 80, 200, 0.7);
+}
+
+/* 上方- 預覽圖 */
+.stream > img {
+  width: 100%;
+}
+
+/* 下方 - 頭像和資訊 */
+.stream__info {
+  display: flex;
+  padding: 6px;
+}
+
+.stream__avatar {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.stream__avatar > img {
+  width: 100%;
+}
+
+.stream__desc {
+  color: #eee;
+  width: 270px;
+}
+
+.stream__desc .stream__title { 
+  font-size: 22px;
+  overflow:hidden;
+  /* 修飾過長的文字，ellipsis：用點點點來表示被切斷的字串 */
+  text-overflow: ellipsis;
+  /* 不進行換行 */
+  white-space: nowrap
+}
+
+.stream__desc .stream__channel {
+  margin-top: 14px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* 設定 RWD：視窗寬度在 1090px 以下時的呈現方式 */
+@media(max-width: 1090px) {
+  .twitch__nav {
+    flex-direction: column;
+    text-align: center;
+    padding: 10px 0px 0px 0px;
+  }
+
+  .twitch__nav li {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  .twitch__nav-list li:hover {
+    color: #000;
+    background: #eee;
+    line-height: ;
+  }
+
+  .wrapper {
+    padding: 50px 0;
+  }
+}
+
