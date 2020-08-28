@@ -103,23 +103,5 @@
   </section>
   </main>
 
-
-  <script>
-    // function escapeHtml(unsafe) {
-    // return unsafe
-    //      .replace(/&/g, "&amp;")
-    //      .replace(/</g, "&lt;")
-    //      .replace(/>/g, "&gt;")
-    //      .replace(/"/g, "&quot;")
-    //      .replace(/'/g, "&#039;");
-    // }
-    // // Escape while typing & print result
-    // document.querySelector('.board__new-comment-form').addEventListener('submit', function () {
-    //   document.querySelectorAll('.card')
-    //   alert(e.target.value);
-    //   // escapeHtml(e.target.value);
-
-    // });
-  </script>
 </body>
 </html>
