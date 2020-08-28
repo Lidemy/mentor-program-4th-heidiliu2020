@@ -13,7 +13,7 @@
 
   // sprintf() 裡面可以放入替代字元
   $sql = sprintf(
-    "INSERT INTO users(nickname, username, password) VALUES('%s', '%s', '%s')",
+    "INSERT INTO Heidi_users(nickname, username, password) VALUES('%s', '%s', '%s')",
     $nickname,
     $username,
     $password

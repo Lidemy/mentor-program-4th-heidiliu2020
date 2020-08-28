@@ -17,7 +17,7 @@
 
   // sprintf() 裡面可以放入替代字元
   $sql = sprintf(
-    "INSERT INTO comments(nickname, content) VALUES('%s', '%s')",
+    "INSERT INTO Heidi_comments(nickname, content) VALUES('%s', '%s')",
     $nickname,
     $content
   );
