@@ -24,14 +24,14 @@ ul, li, a {
 }
 
 .list {
-  max-width: 720px;
+  max-width: 560px;
   margin: 0 auto;
   border: 1px solid #eee;
   margin-top: 20px;
   background: #fafafa;
-  box-shadow: 1.4px 1.4px 8px 0 rgb(199, 197, 197);
-  border-radius: 6px;
-  overflow: hidden;
+  box-shadow: 0px 0px 20px rgb(199, 197, 197);
+  border-radius: 10px;
+  overflow: auto;
 }
 
 /*  標題區塊  */
@@ -54,26 +54,31 @@ ul, li, a {
 
 /* 任務區塊 */
 .list__item {
+  display: flex;
+  align-items: center;
   padding: 16px 50px;
   border-bottom: 1px solid #ddd;
   border-left: 4px solid #fafafa;
-  transition: border-left, background 0.2s;
+  transition: all 0.2s ease-in-out;
   position: relative;
 }
 
 .list__item:hover {
   border-left: 4px solid #db4c3f;
   background: #ddd;
+  cursor: pointer;
 }
 
 .item-context {
   display: inline-block;
   margin-left: 20px;
+  /* 取消點擊事件：可穿透點擊到下方元素 */
+  pointer-events:none;
 }
 
 .item-checkbox {
-  width: 20px; height: 20px;
-  border-radius: 50%;
+  min-width: 20px;
+  height: 20px;
 }
 
 .item-checkbox:hover {
@@ -86,13 +91,13 @@ ul, li, a {
   cursor: pointer;
   border: none;
   outline: none;
-   background: transparent;
+  background: transparent;
   padding: 10px;
   position: absolute;
   right: 0;
   top: 0;
   width: 55px; height: 55px;
-  transition: background 0.2s;
+  transition: all 0.2s ease-in-out;
 }
 
 .btn-deleted:hover {
@@ -136,7 +141,10 @@ ul, li, a {
 /* 輸入區塊 */
 .list__form {
   border-left: 4px solid #fafafa;
-  transition: border-left 0.2s;
+  transition: all 0.2s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .list__form:hover {
@@ -145,6 +153,27 @@ ul, li, a {
 
 .list__form:active {
   border-left: 4px solid #db4c3f;
+}
+
+.add-btn {
+  font-weight: 700;
+  color: #6C6C6C;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  outline: none;
+  background: transparent;
+  letter-spacing: 1.2px;
+  padding: 10px;
+  margin-right: 5px;
+  border-radius: 45px;
+  width: 75px; height: 45px;
+  transition: all 0.2s ease-in-out;
+}
+
+.add-btn:hover {
+  color: white;
+  background: #db4c3f;
+  border: 1px solid #db4c3f;
 }
 
 .list__input {
@@ -157,7 +186,7 @@ ul, li, a {
   letter-spacing: 1.2px;
   margin: 6px 50px;
   padding: 10px;
-  width: 600px;
+  width: 560px;
 }
 
 .list__input:hover {
