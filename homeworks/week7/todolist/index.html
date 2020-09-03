@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo list</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="wrapper">
+    <h1>Todo List</h1>
+    <div class="todo__input-block">
+      <input class="todo__input" type="text" placeholder="Add New Todo Here..." minlength="1" maxlength="48">
+      <button class="btn-new"></button>
+    </div>
+    <div class="todo__hr"></div>
+
+    <ul class="todo__list">
+      <li class="todo">
+        <label class="todo__title">
+          <input class="todo__check" type="checkbox">
+          <p>Fix debug</p>
+        </label>
+        <button class="btn-delete"></button>
+      </li>
+      <li class="todo">
+        <label class="todo__title">
+          <input class="todo__check" type="checkbox">
+          Write code
+        </label>
+        <button class="btn-delete"></button>
+      </li>
+    </ul>
+  </div>
+
+<script src="scripts/todolist.js"></script>
+</body>
+</html>
