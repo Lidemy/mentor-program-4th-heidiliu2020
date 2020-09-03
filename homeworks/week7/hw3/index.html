@@ -21,42 +21,26 @@
     </div>
 
     <div class="list__content">
-      <!-- 任務區塊 -->
+      <!-- todos 區塊 -->
       <ul class=list__container>
+        <!-- checked -->
         <li class="list__item">
-          <input class="item-checkbox" type="checkbox">
-          <p class="item-context">Have breakfast</p>
+            <input class="item-checkbox" type="checkbox">
+          <p class="item-context">Fix debug</p>
           <button class="btn-deleted"></button>
         </li>
-
-        <li class="list__item">
-          <input class="item-checkbox" type="checkbox">
-          <p class="item-context">Write code</p>
-          <button class="btn-deleted"></button>
-        </li>
-
-        <li class="list__item">
-          <input class="item-checkbox" type="checkbox">
-          <p class="item-context">Play volleyball</p>
-          <button class="btn-deleted"></button>
-        </li>
-
-        <li class="list__item">
-          <input class="item-checkbox" type="checkbox">
-          <p class="item-context">Read a book</p>
-          <button class="btn-deleted"></button>
-        </li>
-
-        <li class="list__item">
-          <input class="item-checkbox" type="checkbox">
-          <p class="item-context">Watch a movie</p>
+        <!-- unchecked -->
+        <li class="list__item item-finished">
+          <input class="item-checkbox" type="checkbox" checked>
+          <p class="item-context item-context-finished">Play volleyball</p>
           <button class="btn-deleted"></button>
         </li>
       </ul>
       
       <!-- 輸入區塊 -->
       <div class="list__form">
-        <input class="list__input" type="text" placeholder="Add New Todo Here...">
+        <input class="list__input" type="text" placeholder="Add New Todo Here..." minlength="1" maxlength="30">
+        <button class="add-btn">Add</button>
       </div>
     </div>
 
