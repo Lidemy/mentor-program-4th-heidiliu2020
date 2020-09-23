@@ -15,7 +15,7 @@
   }
 
   // 以 id 進行 desc（遞減）排序，也就是"後新增的留言"會排在前面
-  $result = $conn->query("SELECT * FROM Heidi_comments ORDER BY id DESC");
+  $result = $conn->query("SELECT * FROM heidi_comments ORDER BY id DESC");
   // 檢查是否有資料
   if (!$result) {
     die('Error:' . $conn->error);

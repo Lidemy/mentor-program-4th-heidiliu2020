@@ -1,7 +1,8 @@
 <?php
-  require_once('conn.php');
+  session_start();
+  require_once("conn.php");
+  require_once("utils.php");
 
-  // 以 empty() 判斷值是否為 null
   if (empty($_POST['nickname']) || empty($_POST['username']) || empty($_POST['password'])) {
     header("Location: register.php?errCode=1");
     die("資料不齊全"); 
@@ -9,18 +10,12 @@
  
   $nickname = $_POST['nickname'];
   $username = $_POST['username'];
-  $password = $_POST['password'];
+  $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-  // sprintf() 裡面可以放入替代字元
-  $sql = sprintf(
-    "INSERT INTO heidi_users(nickname, username, password) VALUES('%s', '%s', '%s')",
-    $nickname,
-    $username,
-    $password
-  );
-
-  // 把執行結果存在 $result 這個變數中
-  $result = $conn->query($sql);
+  $sql = "INSERT INTO heidi_blog_users(nickname, username, password) VALUES(?, ?, ?)";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("sss", $nickname, $username, $password);
+  $result = $stmt->execute();
   // 確認是否有拿到結果
   if (!$result) {
     // errno: error number 得到錯誤訊息代號
@@ -32,6 +27,7 @@
     die($conn->error);
   }
 
-  // 若註冊成功，將頁面導回 index.php
+  // 若註冊成功，保持登入狀態，並將頁面導回 index.php
+  $_SESSION['username'] = $username;
   header("Location: index.php");
 ?>
