@@ -24,14 +24,8 @@ body {
   margin-bottom: 10px;
 }
 
-.bg {
-  background: #e4f0fb;
-  position: relative;
-}
-
-
-
 .wrapper {
+  background: #e4f0fb;
   width: 100%;
   /* view hight：將最小高度設定為瀏覽器可顯示區域的高度 */
   min-height: 100vh;
