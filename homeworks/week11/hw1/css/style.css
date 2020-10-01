@@ -1,0 +1,230 @@
+/* CSS Reset：取消預設空隙 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #f7f7f7;
+  font-family: Questrial, "微軟正黑體";
+  min-height: 100vh;
+}
+
+.warning {
+  background: #5c9edc;
+  color: #fff;
+  padding: 8px; 
+  text-align: center;
+  font-weight: 700;
+}
+
+.error {
+  color: #db4c3f;
+  margin-bottom: 10px;
+}
+
+.wrapper {
+  background: #e4f0fb;
+  width: 100%;
+  /* view hight：將最小高度設定為瀏覽器可顯示區域的高度 */
+  min-height: 100vh;
+  padding: 30px;
+}
+
+.board {
+  background: rgb(255, 255, 255, 0.85);
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 30px;
+  box-shadow: 1px 1px 8px #ddd;
+  border-radius: 8px;
+  position: relative;
+  z-index: 5;
+}
+
+.board__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.board__btn {
+  padding: 8px 14px;
+  margin-left: 10px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  color: #583c63;
+  background: rgb(255, 255, 255, 0.3);
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.board__user-block {
+  margin: 10px 0;
+  color: #583c63;
+  display: flex;
+  justify-content: space-between;
+}
+
+.board__user-block h4 {
+  padding-top: 5px;
+}
+
+.hide {
+  display: none;
+}
+
+.board__tittle {
+  color: #583c63;
+  margin-bottom: 8px;
+}
+
+.board__nickname {
+  margin-bottom: 10px; 
+}
+
+.board__nickname input {
+  border: 1px solid #c2dffb;
+  padding: 5px;
+}
+
+.board__new-comment-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #c2dffb;
+}
+
+.board__submit-btn{
+  padding: 8px 14px;
+  margin-top: 5px;
+  border-radius: 6px;
+  border: 1px solid #c2dffb;
+  color: #583c63;
+  background: rgb(255, 255, 255, 0.9);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.board__hr {
+  margin: 20px auto;
+  height: 1px;
+  background: #e8e8ee;
+  min-width: 95%;
+}
+
+.card {
+  display: flex;
+  margin: 24px 0;
+  min-width: 70px;
+}
+
+.card__avatar {
+  /* 設置最小寬度，圓形就不會被右方壓縮到變形 */
+  min-width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #e4f0fb;
+}
+
+.card__body {
+  margin-left: 10px;
+}
+
+.card__info {
+  font-size: 16px;
+}
+
+.card__author {
+  color: #5c9edc;
+  font-weight: 700;
+}
+
+.card__time {
+  color: #a0a0a0;
+}
+
+.card__content {
+  margin-top: 8px;
+  max-width: 100%;
+  letter-spacing: 1px;
+  /* word-break：文字斷行 // break-all：遇到邊界就換行 */
+  word-break: break-all;
+  /* white-space：如何處理元素內的空白 // pre-line：自動合併多個空白，但保留換行符號 */
+  white-space: pre-line;
+}
+
+.card__btn {
+  padding: 4px 6px;
+  margin-left: 5px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  color: #583c63;
+  background: rgb(255, 255, 255, 0.3);
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.page-info {
+  text-align: center;
+}
+
+.paginator {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.paginator a {
+  text-decoration: none;
+  color: #583c63;
+  font-weight: bold;
+  border: 1px solid #ddd;
+  padding: 6px 8px;
+  border-radius: 3px;
+  margin-right: 5px;
+}
+
+.admin-page {
+  max-width: 100%;
+}
+
+.admin__table {
+  border: 1px solid #583c63; 
+  text-align: center;
+  /* collapse: 設置表格的邊框被合併成一個邊框 */
+  border-collapse: collapse;
+  font-size: 18px;
+  width: 100%;
+}
+
+.admin__table th { 
+  border:1px solid #583c63;
+  background-color: #a0a0a0;
+  color : #fff;
+  padding: 12px;
+} 
+.admin__table td { 
+  border: 1px solid #583c63;
+  padding: 10px 12px;
+} 
+
+/* 設定 RWD：視窗寬度在 768px 以下時的呈現方式 */
+@media(max-width: 768px) {
+  .wrapper {
+    padding: 10px;
+  }
+
+  .board__btn {
+    margin-bottom: 10px
+  }
+
+  .board__user-block {
+    flex-direction: column;
+  }
+}

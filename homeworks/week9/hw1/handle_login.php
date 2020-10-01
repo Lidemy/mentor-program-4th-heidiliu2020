@@ -14,7 +14,7 @@
 
   // sprintf() 裡面可以放入替代字元
   $sql = sprintf(
-    "SELECT * FROM Heidi_users WHERE username='%s' AND password='%s'",
+    "SELECT * FROM heidi_users WHERE username='%s' AND password='%s'",
     $username,
     $password
   );
