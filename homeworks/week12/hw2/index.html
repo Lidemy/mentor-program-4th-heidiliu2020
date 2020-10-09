@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week12 Todo List</title>
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <div class="todo__header">
+      <button type="button" class="btn btn-save" href="#">Save</button>
+      <button type="button" class="btn clear-all" href="#">Reset</button>
+    </div>
+    <h1>Todo List</h1>
+    <div class="todo__input-block">
+      <input class="todo__input" type="text" placeholder="Add New Todo Here..." minlength="1" maxlength="128">
+      <button class="btn btn-new"></button>
+    </div>
+
+    <ul class="nav nav-middle justify-content-center todo__status">
+      <li class="nav-item">
+        <a class="nav-link active" href="#" data-filter="all">All</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" data-filter="in-progress">In Progress</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" data-filter="completed">Completed</a>
+      </li>
+    </ul>
+
+    <ul class="todo__list">
+      <!-- 要新增 template 的區塊 -->
+    </ul>
+  </div>
+
+  <script>
+    // 作法一: 直接在 UI 操作 DOM 元素，再從 UI 拿取 data 存到後端，不會更動 data
+    // 作法二(註解): 把 data 狀態和 UI 分開操作，會直接更改 data，每次操作均重新 render，缺點是讀取較慢
+
+    let id = 1;
+    // let todos = [];
+
+    const template = `
+      <li class="todo {todoClass}">
+        <input class="todo__check" type="checkbox" id="todo-{id}">
+        <label class="todo__title" for="todo-{id}">{content}</label>
+        <button class="btn btn-delete"></button>
+      </li>
+    `
+
+    // URLSearchParams(): 解析網址參數
+    const serchParams = new URLSearchParams(window.location.search);  // ?id=...
+    const todoId = serchParams.get('id');
+
+    if (todoId) {
+      $.getJSON('http://mentor-program.co/mtr04group2/Heidi/week12/hw2/api_get_todo.php?id=' + todoId, function (data) {
+        const todos = JSON.parse(data.data.todo);
+        restoreTodos(todos);
+
+        // todos = JSON.parse(data.data.todo);
+        // render();
+      });
+    }
+
+    // 新增功能: 點擊
+    $('.btn-new').click(() => {
+      addTodo()
+    });
+    // 新增功能: 按 Enter
+    $('.todo__input').keydown(e => {
+      if (e.key === 'Enter') {
+        addTodo()
+      }
+    });
+
+    // 刪除功能: 利用事件代理
+    $('.todo__list').on('click', '.btn-delete', (e) => {
+      // const deleteId = $(e.target).parent().find('.todo__check').attr('id').replace('todo-', '');
+      // todos = todos.filter(todo => {
+      // return todo.id !== Number(deleteId);
+      // });
+      // render();
+
+      $(e.target).parent().remove();
+    });
+
+    // 標記狀態: 已完成 / 未完成
+    $('.todo__list').on('change', '.todo__check', (e) => {
+      const target = $(e.target);
+      const isChecked = target.is(":checked");
+      // const updateId = target.attr('id').replace('todo-', '');
+      // for(let i = 0; i < todos.length; i++) {
+      //   if (todos[i].id === Number(updateId)) {
+      //     todos[i].isDone = isChecked;
+      //   }
+      // }
+      // render();
+      if (isChecked) {
+        target.parents('.todo').addClass('checked');
+      } else {
+        target.parents('.todo').removeClass('checked');
+      }
+    });
+
+    // 篩選 todo 狀態
+    $('.todo__status').on('click', 'a', e => {
+      const target = $(e.target);
+      const filter = target.attr('data-filter');
+      $('.todo__status a.active').removeClass('active');
+      target.addClass('active');
+
+      if (filter === 'all') {
+        $('.todo').show();
+      } else if (filter === 'in-progress') {
+        $('.todo').show();
+        $('.todo.checked').hide();
+      } else {        // completed
+        $('.todo').hide();
+        $('.todo.checked').show();
+      }
+    });
+
+    // 清除所有 todo
+    $('.clear-all').click(() => {
+      $('.todo').remove();
+    });
+
+    // 儲存 todo
+    $('.btn-save').click(() => {
+      let todos = [];
+      $('.todo').each((i, element) => {
+        const input = $(element).find('.todo__check');
+        const label = $(element).find('.todo__title');
+        todos.push({
+          id: input.attr('id').replace('todo-', ''),      // 把 todo-id 的 todo- 換成空字串
+          content: label.text(),
+          isDone: $(element).hasClass('checked')
+        });
+      });
+      const data = JSON.stringify(todos);       // 將 JS 物件轉換成 JSON 字串
+      $.ajax({
+        type: 'POST',
+        url: 'http://mentor-program.co/mtr04group2/Heidi/week12/hw2/api_add_todo.php',
+        data: {
+          todo: data
+        },
+        success: function (resp) {
+          const respId = resp.id
+          window.location = 'index.html?id=' + respId;
+        },
+        error: function () {
+          alert('Error!');
+        }
+      });
+    });
+
+    function addTodo() {
+      const value = $('.todo__input').val();
+      if (!value) return;
+      $('.todo__list').prepend(
+        template
+          .replace('{content}', escape(value))
+          .replace(/{id}/g, id)
+      );
+      id += 1;
+      $('.todo__input').val('');
+
+      // const value = $('.todo__input').val();
+      // if (!value) return;
+      // todos.push({
+      //   id: id,
+      //   content: value,
+      //   isDone: false
+      // });
+      // render(todos);
+      // $('.todo__input').val('');
+    }
+
+    function restoreTodos(todos) {
+      if (todos.length === 0) return;
+      // id 要從讀取的最後一個 todo id 繼續增加
+      id = todos[todos.length - 1].id + 1;
+      for (let i = 0; i < todos.length; i++) {
+        const todo = todos[i];
+        $('.todo__list').prepend(
+          template
+            .replace('{content}', escape(todo.content))
+            .replace(/{id}/g, todo.id)
+            .replace('{todoClass}', todo.isDone ? 'checked' : '')
+        );
+      }
+    }
+
+    // function render() {
+    //   if (todos.length === 0) return;
+    //   // 先把所有狀態都清空
+    //   $('.todo__list').empty();
+    //   id = todos[todos.length - 1].id + 1;
+    //   for (let i = 0; i < todos.length; i++) {
+    //     const todo = todos[i];
+    //     $('.todo__list').prepend(
+    //       template
+    //         .replace('{content}', escape(todo.content))
+    //         .replace(/{id}/g, todo.id)
+    //         .replace('{todoClass}', todo.isDone ? 'checked' : '')
+    //     );
+    //   }
+    // }
+
+    function escape(toOutput) {
+      return toOutput
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+  </script>
+</body>
+
+</html>
