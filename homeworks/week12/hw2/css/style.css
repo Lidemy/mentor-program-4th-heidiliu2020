@@ -119,12 +119,16 @@ h1 {
   align-items: center;
   padding: 6px;
   border-radius: 8px;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.1s;
   position: relative;
 }
 
 .todo:hover {
   background: #eee;
+}
+
+input:disabled {
+  background-color: transparent;
 }
 
 .todo__title {
@@ -134,51 +138,42 @@ h1 {
   align-items: center;
   display: flex;
   word-break: break-all;
-  margin-bottom: 0px;
+  letter-spacing: 1.2px;
+  padding-left: 5px;
+  outline: none;
+  border: none;
+}
+
+.todo__title:focus {
+  outline: 3px solid #6C6C6C;
 }
 
 .todo__check {
   min-width: 20px;
   height: 20px;
-  margin-right: 12px;
+  margin-right: 20px;
 }
 
-input[type=checkbox]:checked ~ label {
+input[type=checkbox]:checked ~ input[type=text] {
   text-decoration: line-through;
   color: rgb(160, 160, 160);
-}
-
-.btn-delete {
-  padding: 10px;
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
   transition: all 0.3s ease-in-out;
 }
 
-.btn-delete:hover {
-  background: rgb(160, 160, 160);
+.todo__edit {
+  flex: 1;
 }
 
-/* 透過偽元素屬性創造符號 */
-.btn-delete:after, .btn-delete:before {
-  content: '';
-  position: absolute;
-  width: 20px; height: 1px;
-  background: #6c6c6c;
+.btn-edit, .btn-delete {
+  color: rgb(160, 160, 160);
+  margin-left: 14px;
+  transition: all 0.2s ease-in-out;
 }
 
-/* 叉叉符號：由兩個長方形旋轉 45 度組成 */
-.btn-delete:after {
-  transform : translate(-50%, -50%) rotate(45deg);
-}
-
-.btn-delete:before {
-  transform : translate(-50%, -50%) rotate(-45deg);
-}
-
-.btn-delete:hover:after, .btn-delete:hover:before {
-  background: #eee;
+.btn-edit:hover, .btn-delete:hover {
+  color: #6c6c6c;
+  cursor: pointer;
+  transform: scale(1.25);
 }
 
 /* nav 導覽列 */

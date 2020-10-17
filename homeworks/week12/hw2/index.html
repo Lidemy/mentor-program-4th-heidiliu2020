@@ -9,6 +9,8 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   <link rel="stylesheet" href="css/style.css">
+  <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"
+    type='text/css'>
 </head>
 
 <body>
@@ -16,7 +18,7 @@
   <div class="wrapper">
     <div class="todo__header">
       <button type="button" class="btn btn-save" href="#">Save</button>
-      <button type="button" class="btn clear-all" href="#">Reset</button>
+      <button type="button" class="btn clear-all" href="#">clear</button>
     </div>
     <h1>Todo List</h1>
     <div class="todo__input-block">
@@ -43,71 +45,89 @@
 
   <script>
     // 作法一: 直接在 UI 操作 DOM 元素，再從 UI 拿取 data 存到後端，不會更動 data
-    // 作法二(註解): 把 data 狀態和 UI 分開操作，會直接更改 data，每次操作均重新 render，缺點是讀取較慢
+    // 作法二: 把 data 狀態和 UI 分開操作，會直接更改 data，每次操作均重新 render，缺點是讀取較慢
 
     let id = 1;
-    // let todos = [];
+    let todos = [];
 
     const template = `
       <li class="todo {todoClass}">
-        <input class="todo__check" type="checkbox" id="todo-{id}">
-        <label class="todo__title" for="todo-{id}">{content}</label>
-        <button class="btn btn-delete"></button>
+        <input type="checkbox" class="todo__check" id="todo-{id}">
+        <input type="text" class="todo__title" for="todo-{id}" value="{content}" disabled="disabled">
+        <i class="fa fa-edit btn-edit"></i>
+        <i class="fa fa-trash btn-delete"></i>
       </li>
     `
 
     // URLSearchParams(): 解析網址參數
-    const serchParams = new URLSearchParams(window.location.search);  // ?id=...
-    const todoId = serchParams.get('id');
+    const searchParams = new URLSearchParams(window.location.search);  // ?id=...
+    const todoId = searchParams.get('id');
 
     if (todoId) {
       $.getJSON('http://mentor-program.co/mtr04group2/Heidi/week12/hw2/api_get_todo.php?id=' + todoId, function (data) {
-        const todos = JSON.parse(data.data.todo);
-        restoreTodos(todos);
-
-        // todos = JSON.parse(data.data.todo);
-        // render();
+        todos = JSON.parse(data.data.todo);
+        render();
       });
     }
 
     // 新增功能: 點擊
     $('.btn-new').click(() => {
-      addTodo()
+      addTodo();
     });
     // 新增功能: 按 Enter
     $('.todo__input').keydown(e => {
       if (e.key === 'Enter') {
-        addTodo()
+        addTodo();
       }
     });
 
     // 刪除功能: 利用事件代理
     $('.todo__list').on('click', '.btn-delete', (e) => {
-      // const deleteId = $(e.target).parent().find('.todo__check').attr('id').replace('todo-', '');
-      // todos = todos.filter(todo => {
-      // return todo.id !== Number(deleteId);
-      // });
-      // render();
-
-      $(e.target).parent().remove();
+      const deleteId = $(e.target).parent().find('.todo__check').attr('id').replace('todo-', '');
+      todos = todos.filter(todo => {
+        if (todo.id === Number(deleteId)) return false
+        return true;
+      });
+      render();
     });
 
-    // 標記狀態: 已完成 / 未完成
+    // 編輯功能: 點擊 btn-edit 可編輯 input
+    $('.todo__list').on('click', '.btn-edit', (e) => {
+      const target = $(e.target);
+      const isChecked = target.parent().hasClass("checked");
+      // 已完成的 todo 無法進行編輯
+      if (isChecked) {
+        return;
+      } else {
+        const editInput = target.parent().find('.todo__title');
+        editInput.removeAttr('disabled', '').focus();
+      }
+    });
+
+    // 當 input 失去焦點時就不可編輯
+    $('.todo__list').on('blur', 'input[type=text]', (e) => {
+      let input = $(e.target);
+      input.attr('disabled', 'disabled');
+      // 更新後端資料
+      const editTodo = input.parent().find('.todo__check').attr('id').replace('todo-', '');
+      for (let i = 0; i < todos.length; i++) {
+        if (todos[i].id === Number(editTodo)) {
+          todos[i].content = input.val();
+        }
+      }
+    })
+
+    // 修改 todo 標記狀態: 已完成 / 未完成
     $('.todo__list').on('change', '.todo__check', (e) => {
       const target = $(e.target);
       const isChecked = target.is(":checked");
-      // const updateId = target.attr('id').replace('todo-', '');
-      // for(let i = 0; i < todos.length; i++) {
-      //   if (todos[i].id === Number(updateId)) {
-      //     todos[i].isDone = isChecked;
-      //   }
-      // }
-      // render();
-      if (isChecked) {
-        target.parents('.todo').addClass('checked');
-      } else {
-        target.parents('.todo').removeClass('checked');
+      const updateId = target.attr('id').replace('todo-', '');
+      for (let i = 0; i < todos.length; i++) {
+        if (todos[i].id === Number(updateId)) {
+          todos[i].isDone = isChecked;
+        }
       }
+      render();
     });
 
     // 篩選 todo 狀態
@@ -128,23 +148,14 @@
       }
     });
 
-    // 清除所有 todo
+    // 清除已完成 todo
     $('.clear-all').click(() => {
-      $('.todo').remove();
+      todos = todos.filter(todo => !todo.isDone);
+      render();
     });
 
     // 儲存 todo
     $('.btn-save').click(() => {
-      let todos = [];
-      $('.todo').each((i, element) => {
-        const input = $(element).find('.todo__check');
-        const label = $(element).find('.todo__title');
-        todos.push({
-          id: input.attr('id').replace('todo-', ''),      // 把 todo-id 的 todo- 換成空字串
-          content: label.text(),
-          isDone: $(element).hasClass('checked')
-        });
-      });
       const data = JSON.stringify(todos);       // 將 JS 物件轉換成 JSON 字串
       $.ajax({
         type: 'POST',
@@ -165,55 +176,34 @@
     function addTodo() {
       const value = $('.todo__input').val();
       if (!value) return;
-      $('.todo__list').prepend(
-        template
-          .replace('{content}', escape(value))
-          .replace(/{id}/g, id)
-      );
-      id += 1;
+      todos.push({
+        id: id,
+        content: value,
+        isDone: false
+      });
+      render();
       $('.todo__input').val('');
-
-      // const value = $('.todo__input').val();
-      // if (!value) return;
-      // todos.push({
-      //   id: id,
-      //   content: value,
-      //   isDone: false
-      // });
-      // render(todos);
-      // $('.todo__input').val('');
     }
 
-    function restoreTodos(todos) {
+    function render() {
       if (todos.length === 0) return;
+      // 先把所有狀態都清空
+      $('.todo__list').empty();
       // id 要從讀取的最後一個 todo id 繼續增加
-      id = todos[todos.length - 1].id + 1;
+      id = Number(todos[todos.length - 1].id) + 1;
       for (let i = 0; i < todos.length; i++) {
         const todo = todos[i];
-        $('.todo__list').prepend(
+        $('.todo__list').append(
           template
             .replace('{content}', escape(todo.content))
             .replace(/{id}/g, todo.id)
             .replace('{todoClass}', todo.isDone ? 'checked' : '')
         );
+        if (todo.isDone) {
+          $('#todo-' + todo.id).prop('checked', true);
+        }
       }
     }
-
-    // function render() {
-    //   if (todos.length === 0) return;
-    //   // 先把所有狀態都清空
-    //   $('.todo__list').empty();
-    //   id = todos[todos.length - 1].id + 1;
-    //   for (let i = 0; i < todos.length; i++) {
-    //     const todo = todos[i];
-    //     $('.todo__list').prepend(
-    //       template
-    //         .replace('{content}', escape(todo.content))
-    //         .replace(/{id}/g, todo.id)
-    //         .replace('{todoClass}', todo.isDone ? 'checked' : '')
-    //     );
-    //   }
-    // }
 
     function escape(toOutput) {
       return toOutput
