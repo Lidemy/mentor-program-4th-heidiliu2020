@@ -157,20 +157,40 @@
     // 儲存 todo
     $('.btn-save').click(() => {
       const data = JSON.stringify(todos);       // 將 JS 物件轉換成 JSON 字串
-      $.ajax({
-        type: 'POST',
-        url: 'http://mentor-program.co/mtr04group2/Heidi/week12/hw2/api_add_todo.php',
-        data: {
-          todo: data
-        },
-        success: function (resp) {
-          const respId = resp.id
-          window.location = 'index.html?id=' + respId;
-        },
-        error: function () {
-          alert('Error!');
-        }
-      });
+      // 如果有 todoID，就直接更新該 todos
+      if (todoId) {
+        $.ajax({
+          method: 'POST',
+          url: 'http://mentor-program.co/mtr04group2/Heidi/week12/hw2/api_update_todo.php',
+          data: {
+            todo: data,
+            id: todoId
+          },
+          success: function (resp) {
+            const respId = resp.id
+            window.location = 'index.html?id=' + respId;
+          },
+          error: function () {
+            alert('儲存失敗！');
+          }
+        });
+      } else {
+        // 沒有的話就新增 todoID
+        $.ajax({
+          type: 'POST',
+          url: 'http://mentor-program.co/mtr04group2/Heidi/week12/hw2/api_add_todo.php',
+          data: {
+            todo: data
+          },
+          success: function (resp) {
+            const respId = resp.id
+            window.location = 'index.html?id=' + respId;
+          },
+          error: function () {
+            alert('Error!');
+          }
+        });
+      }
     });
 
     function addTodo() {
