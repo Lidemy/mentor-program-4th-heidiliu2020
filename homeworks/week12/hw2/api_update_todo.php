@@ -9,7 +9,7 @@
     ) {
     $json = array(
       "ok" => false,
-      "message" => "Please input todo"
+      "message" => "Please input todo!"
     );
     $response = json_encode($json);
     echo $response;
@@ -36,7 +36,7 @@
   // 成功拿到資料
   $json = array(
     "ok" => true,
-    "message" => "成功更新資料",
+    "message" => "update success",
     "id" => $_POST['id']
   );
   // 把建立好的 $json 物件，轉成 JSON 字串輸出

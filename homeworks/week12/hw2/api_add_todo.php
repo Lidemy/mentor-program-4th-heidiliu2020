@@ -36,7 +36,7 @@
   // 成功拿到資料
   $json = array(
     "ok" => true,
-    "message" => "success",
+    "message" => "add success",
     "id" => $conn->insert_id
   );
   // 把建立好的 $json 物件，轉成 JSON 字串輸出
