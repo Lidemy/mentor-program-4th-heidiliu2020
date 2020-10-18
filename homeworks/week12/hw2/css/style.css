@@ -1,0 +1,203 @@
+html, body{
+  width: 100%;
+  height: 100%;
+  font-family: Maven Pro, Questrial, "微軟正黑體"; 
+  box-sizing: border-box;
+}
+
+/* CSS Reset：取消預設空隙 */
+h1, h2, h3, h4, p {
+  padding: 0;
+  margin: 0;
+}
+
+/* 去除標題項目黑點 & 底線 */
+ul, li, a {
+  list-style-type: none;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+}
+
+.wrapper {
+  max-width: 550px;
+  box-shadow: 0px 0px 20px rgb(199, 197, 197);
+  margin: 20px auto;
+  padding: 24px 32px;
+  border-radius: 10px;
+  font-size: 22px;
+  letter-spacing: 1.2px;
+}
+
+.todo__header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn {
+  color: #6C6C6C;
+  outline: transparent;
+}
+
+.btn:hover {
+  color: #000;
+}
+
+.btn:focus {  
+ outline: none;   
+ box-shadow:none;
+}
+
+h1 {
+  font-size: 30px;
+  font-weight: 700;
+  color: #6c6c6c;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* 輸入區塊 */
+.todo__input-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.todo__input {
+  width: 85%;
+  padding: 8px 12px;
+  font-size: 20px;
+  outline: transparent;
+  border: 1px solid #ddd;
+  border-radius: 50px;
+  letter-spacing: 1.2px;
+  transition: all 0.2s ease-in-out;
+}
+
+.todo__input:hover {
+  border: 1px solid #6c6c6c;
+}
+
+.btn-new {
+  border: 1px solid #ddd;
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-new:hover {
+  background: rgb(160, 160, 160);
+}
+
+/* 透過偽元素屬性創造符號 */
+.btn-new:after, .btn-new:before {
+  content: '';
+  position: absolute;
+  width: 20px; height: 1px;
+  background: #6c6c6c;
+}
+
+/* 加號：由一個長方形旋轉 90 度組成 */
+.btn-new:after {
+  transform : translate(-50%, -50%);
+}
+
+.btn-new:before {
+  transform : translate(-50%, -50%) rotate(-90deg);
+}
+
+.btn-new:hover:after, .btn-new:hover:before {
+  background: #eee;
+}
+
+/* todo 容器 */
+.todo {
+  display: flex;
+  align-items: center;
+  padding: 6px;
+  border-radius: 8px;
+  transition: all 0.1s;
+  position: relative;
+}
+
+.todo:hover {
+  background: #eee;
+}
+
+input:disabled {
+  background-color: transparent;
+}
+
+.todo__title {
+  flex: 1;
+  cursor: pointer;
+  font-weight: 700;
+  align-items: center;
+  display: flex;
+  word-break: break-all;
+  letter-spacing: 1.2px;
+  padding-left: 5px;
+  outline: none;
+  border: none;
+}
+
+.todo__title:focus {
+  outline: 3px solid #6C6C6C;
+}
+
+.todo__check {
+  min-width: 20px;
+  height: 20px;
+  margin-right: 20px;
+}
+
+input[type=checkbox]:checked ~ input[type=text] {
+  text-decoration: line-through;
+  color: rgb(160, 160, 160);
+  transition: all 0.3s ease-in-out;
+}
+
+.todo__edit {
+  flex: 1;
+}
+
+.btn-edit, .btn-delete {
+  color: rgb(160, 160, 160);
+  margin-left: 14px;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-edit:hover, .btn-delete:hover {
+  color: #6c6c6c;
+  cursor: pointer;
+  transform: scale(1.25);
+}
+
+/* nav 導覽列 */
+.nav-middle {
+  margin: 10px;
+}
+
+.nav-link {
+  font-size: 16px;
+  font-weight: 500;
+  color: #6c6c6c;
+}
+
+.todo__hr {
+  height: 1px;
+  background: #e8e8ee;
+  min-width: 95%;
+}
+
+.todo__status a {
+  border: 1px solid #fff;
+  border-radius: 5px;
+}
+
+.todo__status a.active  {
+  border:1px solid #ddd;
+}

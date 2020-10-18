@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week12 留言板</title>
+  <!-- 引入 jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <!-- 引入 Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <style>
+    .add-comment-form {
+      margin-bottom: 10px;
+    }
+    .card {
+      margin-bottom: 10px;
+    }
+    .card-title {
+      word-wrap:break-word;
+    }
+    .load-more {
+      margin-bottom: 10px;
+    }
+  </style>
+  <script>
+    const siteKey = 'heidi';
+    const loadMoreButtonHTML = '<button class="load-more btn btn-dark"> 載入更多</button>';
+    let lastId = null;    // before
+    let isEnd = false;    // 確認是否拿完資料
+
+    // 跳脫函式
+    function escape(toOutput) {
+      return toOutput
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // 渲染 comment: 處理讀取的資料 & 決定加在最前面或最後面
+    function appendCommentToDOM(container, comment, isPrepend) {
+      const html = `
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">${escape(comment.nickname)}</h5>
+            <p class="card-text">${escape(comment.content)}
+            </p>
+          </div>
+        </div>
+      `;
+      if (isPrepend) {
+        container.prepend(html);  // 新增到最上方
+      } else {
+        container.append(html);   // 新增到最底部
+      }
+    }
+
+    // 串接 API 抓取回傳的資料
+    function getCommentsAPI(siteKey, before, cb) {
+      let showURL = `http://mentor-program.co/mtr04group2/Heidi/week12/hw1/api_comments.php?site_key=${siteKey}`
+      if (before) {
+        showURL += '&before=' + before
+      }
+      $.ajax({
+        url: showURL
+      }).done(function (data) {
+        cb(data)
+      });
+    }
+
+    // 再包一層 function 避免重複輸入同樣的程式碼
+    function getComments() {
+      const commentDOM = $('.comments');
+      $('.load-more').hide();         // 點擊後就隱藏按鈕
+      if (isEnd) {
+        return;          // 若拿完資料就直接返回
+      }
+      getCommentsAPI(siteKey, lastId, data => {
+        if (!data.ok) {
+          alert(data.message);
+          return;
+        }
+        // 若 request 成功讀取資料
+        const comments = data.discussions;
+        for (let comment of comments) {
+          appendCommentToDOM(commentDOM, comment);
+        }
+
+        let length = comments.length;
+        // 若初始介面留言 < 5 直接返回
+        if (length < 5) {
+          return;
+        }
+        // 有 lastId: 若拿完資料就隱藏按鈕
+        if (length === 0) {
+          isEnd = true;
+          $('.load-more').hide();
+        } else {
+          lastId = comments[length - 1].id;
+          $('.comments').append(loadMoreButtonHTML);   // 新增 "載入更多" 按鈕
+        }
+      });
+    }
+
+    $(document).ready(() => {
+      const commentDOM = $('.comments');
+      // 顯示留言
+      getComments();
+
+      // 載入更多: 以事件代理的方式處理 click 事件 
+      $('.comments').on('click', '.load-more', () => {
+        getComments();
+      })
+
+      const addURL = 'http://mentor-program.co/mtr04group2/Heidi/week12/hw1/api_add_comments.php';
+
+      // 新增留言 ->  將資料存到後端
+      $('.add-comment-form').submit(e => {
+        e.preventDefault();             // 取消原生行為 -> 不會送出表單
+        const newCommentData = {
+          'site_key': 'heidi',
+          'nickname': $('input[name=nickname]').val(),
+          'content': $('textarea[name=content]').val()
+        }
+        $.ajax({
+          type: 'POST',
+          url: addURL,
+          data: newCommentData
+        }).done(function(data) {        // done(): 以函數處理回傳的 data 資料
+          // 執行失敗
+          if (!data.ok) {
+            alert(data.message);
+            return;
+          }
+          // 執行成功: 按下送出後把欄位清空
+          $('input[name=nickname]').val('');
+          $('textarea[name=content]').val('');
+          // 新增留言後以 JS 動態方式加到最上方
+          appendCommentToDOM(commentDOM, newCommentData, true);
+        });
+      });
+    });
+
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <form class="add-comment-form">
+      <div class="form-group">
+        <label for="form-nickname">暱稱</label>
+        <input name="nickname" type="text" class="form-control" id="form-nickname" >
+      </div>
+      <div class="form-group">
+        <label for="content-textarea">留言內容</label>
+        <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      </div>
+      <button type="submit" class="btn btn-dark">送出</button>
+    </form>
+    <div class="comments">
+      <!-- 以 JavaScript 動態顯示資料的區塊 -->
+    </div>
+
+  </div>
+
+</body>
+</html>
