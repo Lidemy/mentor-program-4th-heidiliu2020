@@ -206,7 +206,8 @@
     }
 
     function render() {
-      if (todos.length === 0) return;
+      // if (todos.length === 0) return;  -> 若加上此判斷， delete 到最後一個 todo 時會在執行 render 前就 return，因此不會更新畫面
+      
       // 先把所有狀態都清空
       $('.todo__list').empty();
       // id 要從讀取的最後一個 todo id 繼續增加
