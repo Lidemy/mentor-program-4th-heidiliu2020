@@ -5,27 +5,18 @@ import $ from 'jquery';
 
 // 初始化: 動態匯入表單
 export function init(options) {
-  let siteKey = '';
-  let apiUrl = '';
   let containerElement = null;
   let commentDOM = null;
   let lastId = null;    // before
   let isEnd = false;    // 確認是否拿完資料
-  let loadMoreClassName;
-  let loadMoreSelector;
-  let commentsClassName;
-  let commentsSelector;
-  let formClassName;
-  let formSelector;
 
-  siteKey = options.siteKey;
-  apiUrl = options.apiUrl;
-  loadMoreClassName = `${siteKey}-load-more`;
-  commentsClassName = `${siteKey}-comments`;
-  formClassName = `${siteKey}-add-comment-form`;
-  loadMoreSelector = '.' + loadMoreClassName;
-  commentsSelector = '.' + commentsClassName;
-  formSelector = '.' + formClassName;
+  const { siteKey, apiUrl } = options;
+  const loadMoreClassName = `${siteKey}-load-more`;
+  const commentsClassName = `${siteKey}-comments`;
+  const formClassName = `${siteKey}-add-comment-form`;
+  const loadMoreSelector = '.' + loadMoreClassName;
+  const commentsSelector = '.' + commentsClassName;
+  const formSelector = '.' + formClassName;
 
   containerElement = $(options.containerSelector);
   containerElement.append(getForm(formClassName, commentsClassName));
@@ -72,11 +63,11 @@ export function init(options) {
         return;
       }
       const comments = data.discussions;
-      for (const comment of comments) {
+      for (let comment of comments) {
         appendCommentToDOM(commentDOM, comment);
       }
 
-      const length = comments.length;
+      let length = comments.length;
       if (length < 5) {
         return;
       }
