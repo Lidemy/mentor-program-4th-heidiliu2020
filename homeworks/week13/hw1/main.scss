@@ -1,0 +1,268 @@
+$color-primary: #000;
+$color-light-primary: #434343;
+$color-secondary: #323232;
+$border: #737373;
+$warning: #db4c3f;
+$text-light: #eee;
+$background: #fff;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-style: MicrosoftJhengHeiRegular, "微軟正黑體";
+  list-style: none;
+  text-decoration: none;
+}
+
+/* header */
+.navbar {
+  padding: 16px 36px;
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  &__site-name a {
+    font-size: 28px;
+    color: $color-secondary;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+    > div {
+      display: flex;
+    }
+    a {
+      display: inline-block;
+      color: $color-light-primary;
+      font-size: 16px;
+      padding: 10px 12px;
+      border-radius: 5px;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s ease-in-out;
+    }
+    a:hover {
+      background:$color-light-primary;
+      color: $text-light;
+    }
+  }
+}
+
+
+/* banner */
+.banner {
+  background-image: linear-gradient(to top, $color-primary, $color-light-primary);
+  padding: 80px 0 100px 0;
+  color: $text-light;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  &__wrapper > div {
+    margin-top: 26px;
+    text-align: center;
+  }
+  h1 {
+    font-size: 28px;
+    margin: 0;
+  }
+}
+
+/* content */
+.container__wrapper {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 138px;
+}
+
+.posts, .container {
+  background: $background;
+  padding: 6px;
+  display: inline-flex;
+  margin: 0 auto;
+  margin-top: -30px;
+  flex-direction: column;
+}
+
+.post {
+  width: 900px;
+  padding: 30px;
+  border: solid 1px $border;
+  & + .post {
+    margin-top: 24px;
+  }
+  &__header {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__action {
+    padding: 3px 12px;
+    border: solid 1px $border;
+    color: $border;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  &__info {
+    margin-top: 19px;
+    padding: 12px 22px;
+    background: $text-light;
+  }
+  &__content {
+    margin-top: 17px;
+    white-space: pre-wrap;
+    line-height: 1.5em;
+  }
+}
+
+.btn-read-more {
+  display: inline-block;
+  padding: 12px 16px;
+  border: solid 1px $border;
+  color: $border;
+  margin-top: 36px;
+  text-decoration: none;
+}
+
+/* login */
+.login-wrapper {
+  margin: 0 auto;
+  border: solid 1px $color-primary;
+  background: $background;
+  width: 527px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 62px 72px;
+  margin-top: -30px;
+  margin-bottom: 130px;
+  form {
+    width: 100%;
+  }
+  input {
+    width: 100%;
+    font-size: 16px;
+  }
+  input[type=submit] {
+    height: 56px;
+    background-image: linear-gradient(to top, $color-primary,$color-light-primary);
+    color: $text-light;
+    margin-top: 70px;
+    cursor: pointer;
+  }
+   h2 {
+    font-size: 32px;
+    font-weight: normal;
+    margin-bottom: 30px;
+  }
+}
+
+.input {
+  &__field {
+    margin-top: 16px;
+    padding: 6px;
+  }
+  &__wrapper + &__wrapper {
+    margin-top: 23px;
+  }
+  &__label {
+    font-size: 16px;
+    margin-left: 21px;
+  }
+}
+
+/* edit */
+.edit-post {
+  width: 900px;
+  padding: 30px;
+  border: solid 1px $border;
+  &__title {
+    font-size: 20px;
+  }
+  &__input-wrapper {
+    width: 100%;
+    margin-top: 28px;
+    input, textarea {
+      width: 100%;
+      padding: 6px;
+    }
+  }
+  &__btn {
+    display: inline-block;
+    padding: 10px 39px;
+    border: solid 1px $border;
+    color: $border;
+    background: $background;
+    cursor: pointer;
+    margin-top: 25px;
+    &-wrapper {
+      text-align: right;
+    }
+  }
+}
+
+/* admin */
+.admin-post {
+  padding: 24px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $border;
+  font-size: 14px;
+  width: 920px;
+  &__title {
+    font-size: 16px;
+    margin-left: 16px;
+  }
+  &__info {
+    display: flex;
+    align-items: center;
+    margin-left: 12px;
+  }
+  &__created-at {
+    color: #8f8f8f;
+  }
+  &__btn {
+    padding: 4px 8px;
+    border: 1px solid $border;
+    color: $border;
+    cursor: pointer;
+    margin-left: 8px;
+    text-decoration: none;
+    &:last-child {
+    margin-right: 16px;
+    }
+  }
+}
+
+.error {
+  color: $warning;
+  margin-bottom: 16px;
+  &-admin {
+    color: $warning;
+    margin-top: 16px;
+  }
+}
+
+/* footer */
+footer {
+  padding: 10px 0px;
+  background-color: $color-secondary;
+  font-size: 14px;
+  color: $text-light;
+  text-align: center;
+}
+
+/* 設定 RWD：視窗寬度在 768px 以下時的呈現方式 */
+@media(max-width: 768px) {
+  .navbar {
+    padding: 12px;
+  }
+}
