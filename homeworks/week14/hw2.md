@@ -104,6 +104,13 @@ $ sudo apt update && sudo apt upgrade && sudo apt dist-upgrade
 
 ![](https://i.imgur.com/zgZtaUB.png)
 
+### `exit`：結束連線狀態
+
+輸入 `exit` 後就會直接登出，回到本地端。
+
+這個指令雖然很基本，自己一開始卻沒有想到，反而還會重開 bash 或等它自動斷線XD
+此外，bash 可以同時開啟多個視窗，所以是可以分別對本機和遠端主機下指令的。
+
 ---
 
 ## 設定 LAMP Server
