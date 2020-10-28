@@ -39,12 +39,15 @@
 ![](https://i.imgur.com/BY8vzW5.png)
 
 1. 註冊 AWS 會員
-2. 進入 AWS 管理控制台
+2. 進入 AWS 管理控制台，右上方的選單可以選擇架設主機的地區（離所在地越近主機速度越快，但相對之下價格也會比較貴）
+
+![](https://i.imgur.com/dKkK0oF.png)
+
 3. 啟動虛擬機器 - 使用 EC2
 
 ![](https://i.imgur.com/PPo4YVf.png)
 
-4. 選擇方案：找到「Ubuntu Server 18.04 LTS (HVM), SSD Volume Type」並點選 Select
+4. 選擇主機 Image 方案：找到「Ubuntu Server 18.04 LTS (HVM), SSD Volume Type」並點選 Select
 
 > Ubuntu 是基於 Debian 的 Linux 發行版，是個免費開源的作業系統。Ubuntu Server 版是為執行伺服端的應用程式而設計的伺服器版本。
 
@@ -54,7 +57,7 @@
 
 ![](https://i.imgur.com/p7ylYvJ.png)
 
-6. 點選「Add Rule」新增欄位，共需新增兩個，分別是「HTTP 跟 HTTPS」，後面的資料會自動帶入（例如 port 80 和 port 443）
+6. 設定防火牆：也就是允許哪些 IP 連線。點選「Add Rule」新增欄位，共需新增兩個，分別是「HTTP 跟 HTTPS」，後面的資料會自動帶入（例如 port 80 和 port 443）
 
 ![](https://i.imgur.com/2rEWA1g.png)
 
