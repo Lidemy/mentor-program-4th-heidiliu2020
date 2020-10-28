@@ -53,7 +53,7 @@
 
 ![](https://i.imgur.com/wFjYN6H.png)
 
-5. 選擇有綠色標籤的免費方案，按右下角的 Next，一直到 Step6
+5. 選擇主機等級：選有綠色標籤的免費方案，按右下角的 Next，一直到 Step6
 
 ![](https://i.imgur.com/p7ylYvJ.png)
 
@@ -86,15 +86,23 @@ $ ssh -i "<私鑰檔案路徑>" ubuntu@ec2-< IPv4 位置>.us-east-2.compute.amaz
 
 ---
 
-## 更新 Ubuntu Server
+## 實用指令
+
+### 更新 Ubuntu Server
 
 安裝好 Ubuntu Server 後，需要把更新系統版本到最新，避免遇到安全性漏洞以及程式的 BUG。
 
-CLI 指令如下：
+CLI 指令如下，其中 apt 是用來管理 ubuntu 軟體的程式（可想像成 `npm install`）：
 
 ```=
 $ sudo apt update && sudo apt upgrade && sudo apt dist-upgrade
 ```
+
+### `top`：查看主機即時資訊
+
+會進去下方介面，可查看有哪些 process 在運行、或占用多少 Memory等等。點選 Q 鍵可離開。
+
+![](https://i.imgur.com/zgZtaUB.png)
 
 ---
 
@@ -132,6 +140,10 @@ $ sudo tasksel install lamp-server
 3. 接著確認伺服器是否有成功運行，在瀏覽器輸入剛剛記下伺服器的 IPv4 IP 位置，若看到下方預設網頁就代表安裝成功！
 
 ![](https://i.imgur.com/ednoBoi.png)
+
+- 也可利用 `telnet <IP 位置> <port>` 指令，檢視這個埠是否可使用，出現 Connected 就代表成功：
+
+![](https://i.imgur.com/GRUQNVb.png)
 
 ---
 
@@ -290,6 +302,22 @@ $ sudo vim /usr/share/phpmyadmin/libraries/sql.lib.php
 
 ---
 
+### 修改 MySQL 帳號設定
+
+此外，若想要使用 phpmyadmin 以外的圖形化界面操作資料庫（例如：[Sequel Pro](https://www.sequelpro.com/)），可能會有無法連線的問題，因為預設只能從本機登入 MySQL，因此我們需要修改一些設定，步驟如下：
+
+1. 到 phpmyadmin 使用者帳號的介面，點選 root 帳號的「編輯權限」後，會進入編輯權限介面：
+
+2. 點選上方的「登入資訊」，在修改登入的主機名稱，改成任意主機，符號會變成 `&`
+
+![](https://i.imgur.com/Kd6FQxB.png)
+
+3. 回到帳號介面，會發現多了一組 root 帳號如下，這樣就完成設定了！可使用 phpmyadmin 以外的軟體來連到遠端組機
+
+![](https://i.imgur.com/EzcFjgw.png)
+
+---
+
 ## 設定域名
 
 ![](https://i.imgur.com/hBbMxyF.png)
@@ -345,26 +373,22 @@ $ ssh -i "<私鑰檔案路徑>" ubuntu@ec2-< IPv4 位置>.us-east-2.compute.amaz
 
 ![](https://i.imgur.com/XQh7p9v.png)
 
-6. 因此我們要透過 `chmod` 指令來修改檔案權限：
+6. 這時可以輸入 `cd ..` 回到 `/var/www` 目錄，再輸入 `ls -al` 可知目前只有 root 帳號有編輯權限：
 
-> [chmod](https://zh.wikipedia.org/wiki/Chmod)（change mode）：是在 Unix 系統中用於控制用戶對檔案的權限的命令
+![](https://i.imgur.com/MJ6kZw7.png)
+
+7. 因此我們要透過 `chown` 指令來修改 ubuntu 帳號的檔案權限：
+
+> - `chown（change owner）`：改變檔案擁有者 = 定義誰擁有文件。
+> - `chmod（change mode）`：改變檔案的權限 = 定義誰可以做什麽。
 
 ```=
 $ sudo chown ubuntu /var/www/html
 ```
 
-7. 修改完成後即可在 `var/www/html` 目錄新增檔案！
+8. 修改完成後即可在 `var/www/html` 目錄新增檔案！這時再以 `la -al` 檢視，會發現變成 ubuntu 擁有權限：
 
-### 修改 `conn.php`
-
-如果是部署動態網站，需要連線到遠端資料庫，那就需要修改 `conn.php` 連線資料庫需要的資料，也就是修改成剛剛設定的 root 帳密：
-
-```
-$server_name = 'localhost';
-$username = 'root';
-$password = '<root 密碼>';
-$db_name = '<資料庫名稱>';
-```
+![](https://i.imgur.com/uG4D3Ee.png)
 
 ### 利用 git clone 上傳專案
 
@@ -394,6 +418,17 @@ $db_name = '<資料庫名稱>';
 4. 接著就可以放上寫好的程式
 5. 在瀏覽器輸入 `<網域名稱/路徑>`，確認是否有部署成功
 
+### 修改 `conn.php`
+
+如果是部署動態網站，需要連線到遠端資料庫，那就需要修改 `conn.php` 連線資料庫需要的資料，也就是修改成剛剛設定的 root 帳密：
+
+```
+$server_name = 'localhost';
+$username = 'root';
+$password = '<root 密碼>';
+$db_name = '<資料庫名稱>';
+```
+
 ---
 
 ## 部署心得
@@ -408,7 +443,7 @@ $db_name = '<資料庫名稱>';
 
 - 為什麼選擇用 Ubuntu Server？
 
-Ubuntu Server 是為執行伺服端的應用程式而設計的伺服器版本。簡言之，就是專門用來架設伺服器的。
+Ubuntu Server 是為執行伺服端的應用程式而設計的伺服器版本。簡言之，就是專門用來架設伺服器。
 
 - 為什麼要安裝 Tasksel 套件？
 
@@ -423,7 +458,7 @@ Ubuntu Server 是為執行伺服端的應用程式而設計的伺服器版本。
 
 ### 待解決問題
 
-上傳 Markdown 檔案時，發現中文部分會有亂碼問題，有查到幾個解決方法，但覺得好像在這花有點多時間，決定之後再來參考方法三來解決：
+上傳 Markdown 檔案時，發現中文部分會有亂碼問題，有查到幾個解決方法，但覺得好像在這花有點多時間，決定之後再參來考方法三來解決：
 
 1. 安裝 apache-mod-markdown 套件
 
