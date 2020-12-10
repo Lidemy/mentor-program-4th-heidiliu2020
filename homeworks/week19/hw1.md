@@ -275,7 +275,7 @@ P2 身為一個管理者，我希望可以在客服訊息管理頁面，回覆�
 
 ### 附件一、 User Flow
 
-看不清楚的話 → [點選連結](https://whimsical.com/user-flow-3tEi3hG3GKRsEhkS2NWyUr)
+大圖連結 → [前台](https://whimsical.com/user-flow-3tEi3hG3GKRsEhkS2NWyUr) & [後台](https://whimsical.com/user-flow-manager-BgBcJw88u6hrNPrxwfpJDv)
 ![](https://i.imgur.com/20mXWKx.png)
 
 ![](https://i.imgur.com/G4K6zXf.png)
@@ -325,25 +325,33 @@ P2 身為一個管理者，我希望可以在客服訊息管理頁面，回覆�
 ### 商品 + 購物車頁面
 
 **商品列表頁面(前台)**
+
 ![](https://imgur.com/9SOyuQ8.png)
 
 **商品頁面(前台)**
+
 ![](https://imgur.com/IHHFVgL.png)
 
 **商品管理頁面(後台)**
+
 ![](https://imgur.com/Wp0wxcG.png)
 
 **商品編輯頁面(後台)**
+
 ![](https://imgur.com/xX0h81h.png)
 
 **分類管理頁面(後台)**
+
 ![](https://imgur.com/mPekXW9.png)
 
 **訂單管理頁面(後台)**
+
 ![](https://imgur.com/va9a9ra.png)
 
 **購物車(前台)**
+
 ![](https://imgur.com/G8KtJZQ.png)
 
 **結帳頁面(前台)**
+
 ![](https://imgur.com/N8zQLEU.png)
