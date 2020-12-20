@@ -20,10 +20,6 @@ const FooterContainer = styled.div`
 `;
 
 export default function Footer() {
-  if (window.opener) {
-    window.opener.location = "https://phish.example.com";
-  }
-
   return (
     <Root>
       <FooterContainer>
